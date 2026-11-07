@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@theme {
+  --font-brand: 'Cinzel', serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Montserrat', sans-serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-gold-200: #F6E6C6;
+  --color-gold-300: #F3DAA2;
+  --color-gold-400: #E5C384;
+  --color-gold-500: #C5A568;
+  --color-gold-600: #9B7C43;
+
+  --color-midnight-950: #03070E;
+  --color-midnight-900: #050B14;
+  --color-midnight-850: #070F1E;
+  --color-midnight-800: #0B162C;
+  --color-midnight-700: #101D38;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #050B14;
+    color: #E5E9F0;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #050B14;
+    color: #CBD5E1;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: -0.01em;
+  }
+}
+
+.font-brand {
+  font-family: 'Cinzel', serif;
+}
+
+.font-script {
+  font-family: 'Great Vibes', cursive;
+}
+
+.font-display {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Luxury card styling */
+.luxury-card {
+  background: linear-gradient(180deg, rgba(16, 29, 56, 0.7) 0%, rgba(7, 15, 30, 0.85) 100%);
+  border: 1px solid rgba(229, 195, 132, 0.18);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(229, 195, 132, 0.15);
+  transition: all 0.3s ease;
+}
+
+.luxury-card:hover {
+  border-color: rgba(229, 195, 132, 0.4);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6), 0 0 25px rgba(229, 195, 132, 0.08);
+  transform: translateY(-2px);
+}
+
+/* 3D Book Mockup */
+.book-wrapper {
+  perspective: 1400px;
+}
+
+.book-card {
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: rotateY(-18deg) rotateX(4deg);
+}
+
+.book-wrapper:hover .book-card {
+  transform: rotateY(-4deg) rotateX(1deg) translateY(-8px);
+}
+
+.book-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  transform: rotateY(-90deg) translateX(-12px);
+  transform-origin: left;
+}
+
+.book-shadow {
+  box-shadow: 
+    -25px 35px 50px -10px rgba(0, 0, 0, 0.6),
+    -10px 15px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050B14;
+}
+::-webkit-scrollbar-thumb {
+  background: #101D38;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C5A568;
+}
+
+/* ==========================================================================
+   REVEAL ON SCROLL (Scroll Animation via Intersection Observer)
+   ========================================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  will-change: opacity, transform, filter;
+  transition-property: opacity, transform, filter;
+  transition-duration: 0.85s;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Directions */
+.reveal-up {
+  transform: translateY(32px);
+}
+
+.reveal-left {
+  transform: translateX(-36px);
+}
+
+.reveal-right {
+  transform: translateX(36px);
+}
+
+.reveal-scale {
+  transform: scale(0.95) translateY(24px);
+}
+
+/* Active State when in Viewport */
+.reveal.revealed {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+/* Stagger Delays for Editorial Cascade Effect */
+.reveal-delay-1 {
+  transition-delay: 120ms;
+}
+.reveal-delay-2 {
+  transition-delay: 240ms;
+}
+.reveal-delay-3 {
+  transition-delay: 360ms;
+}
+.reveal-delay-4 {
+  transition-delay: 480ms;
+}
+.reveal-delay-5 {
+  transition-delay: 600ms;
+}
+.reveal-delay-6 {
+  transition-delay: 720ms;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.reveal-up,
+  .reveal.reveal-left,
+  .reveal.reveal-right,
+  .reveal.reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
